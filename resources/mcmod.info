@@ -1,0 +1,10 @@
+[
+{
+  "modid": "brewingapi",
+  "name": "Brewing API",
+  "description": "Brewing API is an API that allows modders to conveniently add new brewing recipes to the game.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "authorList": ["Agadar"]
+}
+]
