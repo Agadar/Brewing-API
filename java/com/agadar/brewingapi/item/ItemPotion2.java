@@ -33,6 +33,7 @@ import com.google.common.collect.HashMultimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/** The item that replaces the vanilla Potion item. */
 public class ItemPotion2 extends Item
 {
     /**
