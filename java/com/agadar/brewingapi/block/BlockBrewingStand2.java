@@ -2,9 +2,9 @@ package com.agadar.brewingapi.block;
 
 import java.util.Random;
 
+import com.agadar.brewingapi.BrewingAPI;
 import com.agadar.brewingapi.item.ModItems;
 import com.agadar.brewingapi.tileentity.TileEntityBrewingStand2;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.entity.EntityLivingBase;
@@ -41,21 +41,10 @@ public class BlockBrewingStand2 extends BlockBrewingStand
     @Override
     public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
     {
-        if (p_149727_1_.isRemote)
-        {
-            return true;
-        }
-        else
-        {
-            TileEntityBrewingStand2 tileentitybrewingstand = (TileEntityBrewingStand2)p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_);
-
-            if (tileentitybrewingstand != null)
-            {
-                //p_149727_5_.func_146098_a(tileentitybrewingstand);
-            }
-
-            return true;
-        }
+    	TileEntityBrewingStand2 tileentitybrewingstand = (TileEntityBrewingStand2)p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_);
+    	if (tileentitybrewingstand == null || p_149727_5_.isSneaking()) return false;
+    	p_149727_5_.openGui(BrewingAPI.instance, 0, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);    	
+    	return true;
     }
 
     @Override
@@ -63,7 +52,7 @@ public class BlockBrewingStand2 extends BlockBrewingStand
     {
         if (p_149689_6_.hasDisplayName())
         {
-            ((TileEntityBrewingStand2)p_149689_1_.getTileEntity(p_149689_2_, p_149689_3_, p_149689_4_)).func_145937_a(p_149689_6_.getDisplayName());
+            ((TileEntityBrewingStand2)p_149689_1_.getTileEntity(p_149689_2_, p_149689_3_, p_149689_4_)).setCustomName(p_149689_6_.getDisplayName());
         }
     }
 

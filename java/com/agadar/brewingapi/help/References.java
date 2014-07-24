@@ -6,7 +6,7 @@ public class References
 {
 	public static final String MODID = "brewingapi";
 	public static final String VERSION = "1.0.0";
-	public static final String NAME = "Brewing API";
+	public static final String NAME = "Brewing-API";
 	public static final String CLIENTSIDE = "com.agadar.brewingapi.client.ClientProxy";
 	public static final String SERVERSIDE = "com.agadar.brewingapi.CommonProxy";
 }
