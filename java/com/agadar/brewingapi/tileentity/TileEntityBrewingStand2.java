@@ -16,13 +16,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
-import net.minecraft.tileentity.TileEntityBrewingStand;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.brewing.PotionBrewedEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityBrewingStand2 extends TileEntityBrewingStand implements ISidedInventory
+public class TileEntityBrewingStand2 extends TileEntity implements ISidedInventory
 {
     private static final int[] field_145941_a = new int[] {3};
     private static final int[] field_145947_i = new int[] {0, 1, 2};
@@ -57,7 +57,6 @@ public class TileEntityBrewingStand2 extends TileEntityBrewingStand implements I
         return this.brewingItemStacks.length;
     }
 
-    /** THIS ONE WILL HAVE TO BE OVERRIDEN IF WE DO INHERITANCE */
     @Override
     public void updateEntity()
     {
@@ -103,8 +102,8 @@ public class TileEntityBrewingStand2 extends TileEntityBrewingStand implements I
         return this.brewTime;
     }
 
-    /** THIS ONE HAS BEEN ALTERED */
-    private boolean canBrew()
+    @SuppressWarnings("unchecked")
+	private boolean canBrew()
     {
     	if (this.brewingItemStacks[3] == null || this.brewingItemStacks[3].stackSize <= 0) return false;
     	ItemStack ingredientStack = this.brewingItemStacks[3];
@@ -124,7 +123,9 @@ public class TileEntityBrewingStand2 extends TileEntityBrewingStand implements I
     			if ((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) return true;
     		}
     		    		
-    		PotionEffect input = (PotionEffect) Items.potionitem.getEffects(inputStack).get(0);
+    		List<PotionEffect> inputList = Items.potionitem.getEffects(inputStack);
+    		if (inputList == null || inputList.size() <= 0) return false;   		
+    		PotionEffect input = inputList.get(0);
     		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, ingredientStack.getItem());
     		if (output != null) return true;
     	}
@@ -132,50 +133,46 @@ public class TileEntityBrewingStand2 extends TileEntityBrewingStand implements I
     	return false;
     }
 
-    /** THIS ONE HAS BEEN ALTERED */
     private void brewPotions()
     {
         if (this.canBrew())
         {
-            ItemStack ingredientStack = this.brewingItemStacks[3];
-
             for (int i = 0; i < 3; ++i)
             {
-            	ItemStack inputStack = this.brewingItemStacks[i]; 
-            	if (inputStack == null || !(inputStack.getItem() instanceof ItemPotion)) continue;
-            	int j = inputStack.getItemDamage();
-            	int k = this.func_145936_c(j, ingredientStack);
+            	if (this.brewingItemStacks[i] == null || !(this.brewingItemStacks[i].getItem() instanceof ItemPotion)) continue;
+            	int j = this.brewingItemStacks[i].getItemDamage();
+            	int k = this.func_145936_c(j, this.brewingItemStacks[3]);
             	List<?> list = Items.potionitem.getEffects(j);
             	List<?> list1 = Items.potionitem.getEffects(k);
 
             	if (((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) ||
             			(!ItemPotion.isSplash(j) && ItemPotion.isSplash(k)))
             	{
-            		inputStack.setItemDamage(k);
+            		this.brewingItemStacks[i].setItemDamage(k);
             	}
             	else
             	{
-            		PotionEffect input = (PotionEffect) Items.potionitem.getEffects(inputStack).get(0);
-            		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, ingredientStack.getItem());
+            		PotionEffect input = (PotionEffect) Items.potionitem.getEffects(this.brewingItemStacks[i]).get(0);
+            		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, this.brewingItemStacks[3].getItem());
             		
             		if (output != null)
             		{
                 		List<PotionEffect> outputs = new ArrayList<PotionEffect>();
                 		outputs.add(output);
-            			ModItems.potionitem2.setEffects(inputStack, outputs);
-            			inputStack.setItemDamage(0);
+            			ModItems.potionitem2.setEffects(this.brewingItemStacks[i], outputs);
+            			this.brewingItemStacks[i].setItemDamage(0);
             		}
             	}
             }
 
-            if (ingredientStack.getItem().hasContainerItem(ingredientStack))
+            if (this.brewingItemStacks[3].getItem().hasContainerItem(this.brewingItemStacks[3]))
             {
-            	ingredientStack = ingredientStack.getItem().getContainerItem(ingredientStack);
+            	this.brewingItemStacks[3] = this.brewingItemStacks[3].getItem().getContainerItem(this.brewingItemStacks[3]);
             }
             else
             {
-                --ingredientStack.stackSize;
-                if (ingredientStack.stackSize <= 0) ingredientStack = null;
+                --this.brewingItemStacks[3].stackSize;
+                if (this.brewingItemStacks[3].stackSize <= 0) this.brewingItemStacks[3] = null;
             }
             MinecraftForge.EVENT_BUS.post(new PotionBrewedEvent(brewingItemStacks));
         }
@@ -293,7 +290,6 @@ public class TileEntityBrewingStand2 extends TileEntityBrewingStand implements I
     @Override
     public void closeInventory() {}
 
-    /** THIS ONE HAS BEEN ALTERED */
     @Override
     public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
     {

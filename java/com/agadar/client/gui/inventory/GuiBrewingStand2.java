@@ -23,7 +23,6 @@ public class GuiBrewingStand2 extends GuiContainer
     {
         super(new ContainerBrewingStand2(par1InventoryPlayer, par2TileEntityBrewingStand));
         this.tileBrewingStand = par2TileEntityBrewingStand;
-        System.out.println("GuiBrewingStand2 opened!");
     }
 
     @Override

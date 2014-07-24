@@ -95,6 +95,8 @@ public class BlockBrewingStand2 extends BlockBrewingStand
                 }
             }
         }
+        
+        super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
     }
 
     @Override
