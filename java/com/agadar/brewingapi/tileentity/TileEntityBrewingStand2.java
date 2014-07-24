@@ -109,13 +109,12 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
     	ItemStack ingredientStack = this.brewingItemStacks[3];
 
     	for (int i = 0; i < 3; ++i)
-    	{
-    		ItemStack inputStack = this.brewingItemStacks[i];   			
-    		if (inputStack == null || !(inputStack.getItem() instanceof ItemPotion)) continue;
+    	{  			
+    		if (this.brewingItemStacks[i] == null || !(this.brewingItemStacks[i].getItem() instanceof ItemPotion)) continue;
 
     		if (ingredientStack.getItem().isPotionIngredient(ingredientStack))
     		{
-    			int j = inputStack.getItemDamage();
+    			int j = this.brewingItemStacks[i].getItemDamage();
     			int k = this.func_145936_c(j, ingredientStack);
     			if (!ItemPotion.isSplash(j) && ItemPotion.isSplash(k)) return true;
     			List<?> list = Items.potionitem.getEffects(j);
@@ -123,8 +122,8 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
     			if ((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) return true;
     		}
     		    		
-    		List<PotionEffect> inputList = Items.potionitem.getEffects(inputStack);
-    		if (inputList == null || inputList.size() <= 0) return false;   		
+    		List<PotionEffect> inputList = Items.potionitem.getEffects(this.brewingItemStacks[i]);
+    		if (inputList == null || inputList.size() <= 0) continue;   		
     		PotionEffect input = inputList.get(0);
     		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, ingredientStack.getItem());
     		if (output != null) return true;
@@ -133,7 +132,8 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
     	return false;
     }
 
-    private void brewPotions()
+    @SuppressWarnings("unchecked")
+	private void brewPotions()
     {
         if (this.canBrew())
         {
@@ -152,9 +152,11 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
             	}
             	else
             	{
-            		PotionEffect input = (PotionEffect) Items.potionitem.getEffects(this.brewingItemStacks[i]).get(0);
-            		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, this.brewingItemStacks[3].getItem());
-            		
+            		List<PotionEffect> inputList = Items.potionitem.getEffects(this.brewingItemStacks[i]);
+            		if (inputList == null || inputList.size() <= 0) continue;   		
+            		PotionEffect input = inputList.get(0);
+            		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, this.brewingItemStacks[i].getItem());
+
             		if (output != null)
             		{
                 		List<PotionEffect> outputs = new ArrayList<PotionEffect>();
