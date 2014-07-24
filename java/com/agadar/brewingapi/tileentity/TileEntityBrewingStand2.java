@@ -155,23 +155,12 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
             		if (inputList == null || inputList.size() <= 0) continue;   		
             		PotionEffect input = inputList.get(0);
             		PotionEffect output = BrewingRecipes.brewing().getBrewingResult(input, this.brewingItemStacks[3].getItem());
-            		
-            		
-            		System.out.println("BEFORE");
-            		
-            		
+
             		if (output != null)
             		{
-            			
-            			
-            			System.out.println("AFTER");
-            			
-            			
-            			
                 		List<PotionEffect> outputs = new ArrayList<PotionEffect>();
                 		outputs.add(output);
             			ModItems.potionitem2.setEffects(this.brewingItemStacks[i], outputs);
-            			this.brewingItemStacks[i].setItemDamage(0);
             		}
             	}
             }

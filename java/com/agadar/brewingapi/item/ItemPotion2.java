@@ -15,8 +15,7 @@ public class ItemPotion2 extends ItemPotion
     {
         super();
         this.setUnlocalizedName("potion2");
-        this.setTextureName("potion");
-        
+        this.setTextureName("potion");        
         this.setCreativeTab(null);
     }
     

@@ -25,9 +25,9 @@ public class BrewingRecipes
     /** The private constructor. */
     private BrewingRecipes()
     {
-    	PotionEffect swiftness1 = new PotionEffect(Potion.moveSpeed.id, 3600);
-    	PotionEffect swiftness2 = new PotionEffect(Potion.moveSpeed.id, 3600, 6);
-    	addBrewing(swiftness1, Items.diamond, swiftness2);
+    	PotionEffect test1 = new PotionEffect(Potion.moveSpeed.id, 3600);
+    	PotionEffect test2 = new PotionEffect(Potion.blindness.id, 3600);
+    	addBrewing(test1, Items.diamond, test2);
     }
     
     /** Adds a new brewing recipe, where applying the ingredient to the input results in the output. */
