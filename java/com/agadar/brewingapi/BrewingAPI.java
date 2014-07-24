@@ -1,7 +1,6 @@
 package com.agadar.brewingapi;
 
 import com.agadar.brewingapi.block.ModBlocks;
-import com.agadar.brewingapi.eventhandler.ModEventHandlers;
 import com.agadar.brewingapi.item.ModItems;
 import com.agadar.brewingapi.tileentity.ModTileEntities;
 import com.agadar.brewingapi.help.References;
@@ -31,8 +30,6 @@ public class BrewingAPI
 		ModTileEntities.registerModTileEntities();
 		
 		ModItems.registerModItems();
-		
-		ModEventHandlers.registerModEventHandlers();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}

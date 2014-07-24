@@ -1,4 +1,4 @@
-package com.agadar.brewingapi.potion;
+package com.agadar.brewingapi.brewing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 /** Manages all brewing recipes. */
@@ -27,7 +26,7 @@ public class BrewingRecipes
     /** The private constructor. */
     private BrewingRecipes()
     {
-    	ItemStack stack1 = new ItemStack(Items.potionitem, 1, 8193);
+    	/*ItemStack stack1 = new ItemStack(Items.potionitem, 1, 8193);
     	ItemStack stack2 = new ItemStack(Items.potionitem, 1, 8197);
     	
     	List<PotionEffect> effects1 = new ArrayList<PotionEffect>();
@@ -37,7 +36,7 @@ public class BrewingRecipes
     	this.setEffects(stack2, effects1);    
     	
     	addBrewing(stack1, new ItemStack(Items.dye, 1, 4), stack2);
-    	addBrewing(stack2, new ItemStack(Items.diamond, 2), stack1);
+    	addBrewing(stack2, new ItemStack(Items.diamond, 2), stack1);*/
     }
     
     /**

@@ -13,6 +13,7 @@ import com.agadar.inventory.ContainerBrewingStand2;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/** The GUI for the new brewing stand. */
 @SideOnly(Side.CLIENT)
 public class GuiBrewingStand2 extends GuiContainer
 {

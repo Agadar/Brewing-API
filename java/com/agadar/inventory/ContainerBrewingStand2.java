@@ -1,6 +1,6 @@
 package com.agadar.inventory;
 
-import com.agadar.brewingapi.potion.BrewingRecipes;
+import com.agadar.brewingapi.brewing.BrewingRecipes;
 import com.agadar.brewingapi.tileentity.TileEntityBrewingStand2;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +16,7 @@ import net.minecraft.stats.AchievementList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/** The container for the new brewing stand. */
 public class ContainerBrewingStand2 extends Container
 {
     private TileEntityBrewingStand2 tileBrewingStand;

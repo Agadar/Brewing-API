@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
+/** Handles all of this mod's GUI's. */
 public class GuiHandler implements IGuiHandler
 {
 	@Override

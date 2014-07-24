@@ -1,9 +1,8 @@
-package com.agadar.brewingapi.potion;
+package com.agadar.brewingapi.brewing;
 
 import net.minecraft.item.ItemStack;
 
-/** Represents a brewing recipe, where applying the ingredient to the input results in the output. 
- *  input's Item and output's Item are expected to be instances of ItemPotion. */
+/** Represents a brewing recipe, where applying the ingredient to the input results in the output. */
 public class BrewingRecipe 
 {
 	public final ItemStack input;

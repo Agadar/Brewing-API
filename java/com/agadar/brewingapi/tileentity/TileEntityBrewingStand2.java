@@ -2,7 +2,7 @@ package com.agadar.brewingapi.tileentity;
 
 import java.util.List;
 
-import com.agadar.brewingapi.potion.BrewingRecipes;
+import com.agadar.brewingapi.brewing.BrewingRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -19,6 +19,7 @@ import net.minecraftforge.event.brewing.PotionBrewedEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/** The tile entity belonging to BlockBrewingStand2. */
 public class TileEntityBrewingStand2 extends TileEntity implements ISidedInventory
 {
     private static final int[] field_145941_a = new int[] {3};
