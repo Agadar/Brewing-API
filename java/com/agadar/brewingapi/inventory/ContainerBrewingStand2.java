@@ -1,4 +1,4 @@
-package com.agadar.inventory;
+package com.agadar.brewingapi.inventory;
 
 import com.agadar.brewingapi.brewing.BrewingRecipes;
 import com.agadar.brewingapi.tileentity.TileEntityBrewingStand2;

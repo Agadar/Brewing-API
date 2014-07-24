@@ -1,4 +1,4 @@
-package com.agadar.client.gui.inventory;
+package com.agadar.brewingapi.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -7,8 +7,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.agadar.brewingapi.inventory.ContainerBrewingStand2;
 import com.agadar.brewingapi.tileentity.TileEntityBrewingStand2;
-import com.agadar.inventory.ContainerBrewingStand2;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

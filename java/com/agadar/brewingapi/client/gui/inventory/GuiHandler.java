@@ -1,7 +1,7 @@
-package com.agadar.client.gui.inventory;
+package com.agadar.brewingapi.client.gui.inventory;
 
+import com.agadar.brewingapi.inventory.ContainerBrewingStand2;
 import com.agadar.brewingapi.tileentity.TileEntityBrewingStand2;
-import com.agadar.inventory.ContainerBrewingStand2;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

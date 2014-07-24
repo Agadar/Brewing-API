@@ -1,10 +1,10 @@
 package com.agadar.brewingapi;
 
 import com.agadar.brewingapi.block.ModBlocks;
+import com.agadar.brewingapi.client.gui.inventory.GuiHandler;
 import com.agadar.brewingapi.item.ModItems;
 import com.agadar.brewingapi.tileentity.ModTileEntities;
 import com.agadar.brewingapi.help.References;
-import com.agadar.client.gui.inventory.GuiHandler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
