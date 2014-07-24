@@ -173,7 +173,7 @@ public class ContainerBrewingStand2 extends Container
         @Override
         public boolean isItemValid(ItemStack par1ItemStack)
         {
-            return par1ItemStack != null ? par1ItemStack.getItem().isPotionIngredient(par1ItemStack) || BrewingRecipes.brewing().isPotionIngredient(par1ItemStack.getItem()) : false;
+            return par1ItemStack != null ? par1ItemStack.getItem().isPotionIngredient(par1ItemStack) || BrewingRecipes.brewing().isPotionIngredient(par1ItemStack) : false;
         }
 
         @Override
