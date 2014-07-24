@@ -3,7 +3,10 @@ package com.agadar.brewingapi.brewing;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.agadar.brewingapi.help.References;
+
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -39,18 +42,25 @@ public class BrewingRecipes
     	addBrewing(stack2, new ItemStack(Items.diamond, 2), stack1);*/
     }
     
-    /**
-     * Adds a new brewing recipe, where applying the ingredient to the input results in the output.
+    /** Adds a new brewing recipe, where applying the ingredient to the input results in the output.
      * par1Input's Item and par3Output's Item are expected to be instances of ItemPotion.
      * par1Input's itemdamage and par3Output's itemdamage dictate the color and whether or not the potions are splash potions,
      * just like with any potions. However, the itemdamage ONLY dictates the actual potion effects IF the ItemStacks have no
      * CustomPotionEffect NBTTagLists. If they do, then the actual potion effects are WHOLLY dictated by the NBTTagLists.
      * par2Ingredient's NBTTagCompound is ignored, but its itemdamage is not!
-     * None of the parameters are allowed to be null or have a stacksize equal or smaller to zero.
-     */
+     * None of the parameters are allowed to be null or have a stacksize equal or smaller to zero. */
     public void addBrewing(ItemStack par1Input, ItemStack par2Ingredient, ItemStack par3Output)
     {
-    	if (par1Input == null || par1Input.stackSize <= 0 || par2Ingredient == null || par2Ingredient.stackSize <= 0 || par3Output == null || par3Output.stackSize <= 0) return;
+    	if (par1Input == null || par1Input.stackSize <= 0 || par2Ingredient == null || par2Ingredient.stackSize <= 0 || par3Output == null || par3Output.stackSize <= 0) 
+    	{
+    		throw new IllegalArgumentException(References.NAME + ": Error while adding a brewing recipe - the parameters may not be null or have a stack size smaller than 1.");
+    	}
+    	
+    	if (!(par1Input.getItem() instanceof ItemPotion) || !(par3Output.getItem() instanceof ItemPotion))
+    	{
+    		throw new IllegalArgumentException(References.NAME + ": Error while adding a brewing recipe - the Items of the input and the output ItemStacks have to be instances of ItemPotion.");
+    	}
+    	
     	recipes.add(new BrewingRecipe(par1Input, par2Ingredient, par3Output));
     }
     
