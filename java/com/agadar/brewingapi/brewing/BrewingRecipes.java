@@ -26,26 +26,7 @@ public class BrewingRecipes
         return brewingBase;
     }
     
-    /*static
-    {
-    	ItemStack stack1 = new ItemStack(Items.potionitem, 1, 8193);
-    	ItemStack stack2 = new ItemStack(Items.potionitem, 1, 8197);
-    	
-    	List<PotionEffect> effects1 = new ArrayList<PotionEffect>();
-    	effects1.add(new PotionEffect(Potion.moveSpeed.id, 3600));
-    	effects1.add(new PotionEffect(Potion.invisibility.id, 3600));
-    	
-    	brewingBase.setEffects(stack2, effects1);    
-    	
-    	brewingBase.addBrewing(null, new ItemStack(Items.dye, 1, 4), stack2);
-    	brewingBase.addBrewing(stack2, new ItemStack(Items.diamond, 2), stack1);
-    }*/
-    
-    /** Adds a new brewing recipe, where applying the ingredient to the input results in the output.
-     * par1Input's itemdamage and par3Output's itemdamage dictate the color and whether or not the potions are splash potions,
-     * just like with any potions. However, the itemdamage ONLY dictates the actual potion effects IF the ItemStacks have no
-     * CustomPotionEffect NBTTagLists. If they do, then the actual potion effects are WHOLLY dictated by the NBTTagLists.
-     * par2Ingredient's NBTTagCompound is ignored, but its itemdamage is not! */
+    /** Adds a new brewing recipe, where applying the ingredient to the input results in the output. */
     public void addBrewing(ItemStack par1Input, ItemStack par2Ingredient, ItemStack par3Output)
     {
     	if (par1Input == null || par1Input.stackSize <= 0 || par2Ingredient == null || par2Ingredient.stackSize <= 0 || par3Output == null || par3Output.stackSize <= 0) 
@@ -63,8 +44,7 @@ public class BrewingRecipes
     	recipes.add(new BrewingRecipe(par1Input, par2Ingredient, par3Output));
     }
     
-    /** Returns whether the given ItemStack is a valid ingredient for any brewing recipe.
-     *  Takes both the ItemStack's Item and the ItemStack's itemdamage in account. */
+    /** Returns whether the given ItemStack is a valid ingredient for any brewing recipe. */
     public boolean isPotionIngredient(ItemStack par1Ingredient)
     {
     	for (BrewingRecipe recipe : recipes)
@@ -92,7 +72,7 @@ public class BrewingRecipes
     	return null;
     }
 
-    /** Sets the given ItemStack's potion effects in its NBTTagCompound. */
+    /** Translates the given List of PotionEffects to an NBTTagList and adds it to the given ItemStack's NBTTagCompound. */
     public void setEffects(ItemStack par1ItemStack, List<PotionEffect> par2Effects)
     {
     	par1ItemStack.setTagCompound(new NBTTagCompound());
