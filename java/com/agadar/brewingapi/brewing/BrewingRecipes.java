@@ -66,7 +66,7 @@ public class BrewingRecipes
     		if (recipe.ingredient.getItem() != par2Ingredient.getItem() || recipe.ingredient.getItemDamage() != par2Ingredient.getItemDamage()) continue;   		
     		List<PotionEffect> inputList1 = Items.potionitem.getEffects(recipe.input);
     		List<PotionEffect> inputList2 = Items.potionitem.getEffects(par1Input);
-    		if (inputList1 != null && inputList1.equals(inputList2)) return recipe.output;
+    		if (inputList1 != null && inputList1.equals(inputList2)) return recipe.output.copy();
     	}	
     	
     	return null;
