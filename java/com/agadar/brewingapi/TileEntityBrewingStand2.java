@@ -1,8 +1,6 @@
-package com.agadar.brewingapi.tileentity;
+package com.agadar.brewingapi;
 
 import java.util.List;
-
-import com.agadar.brewingapi.brewing.BrewingRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

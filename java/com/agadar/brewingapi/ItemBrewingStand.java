@@ -1,9 +1,6 @@
-package com.agadar.brewingapi.item;
+package com.agadar.brewingapi;
 
 import java.util.List;
-
-import com.agadar.brewingapi.block.ModBlocks;
-import com.agadar.brewingapi.help.References;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +14,7 @@ public class ItemBrewingStand extends ItemReed
 {
 	public ItemBrewingStand() 
 	{
-		super(ModBlocks.brewing_stand2);
+		super(BrewingAPI.brewing_stand_block2);
 		this.setUnlocalizedName("brewingStand2");
 		this.setCreativeTab(CreativeTabs.tabBrewing);
 		this.setTextureName("brewing_stand");
@@ -29,6 +26,6 @@ public class ItemBrewingStand extends ItemReed
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);        
-        par3List.add(References.NAME);
+        par3List.add(BrewingAPI.NAME);
     }
 }

@@ -1,4 +1,4 @@
-package com.agadar.brewingapi.brewing;
+package com.agadar.brewingapi;
 
 import net.minecraft.item.ItemStack;
 

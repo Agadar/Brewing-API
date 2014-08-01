@@ -1,9 +1,7 @@
-package com.agadar.brewingapi.brewing;
+package com.agadar.brewingapi;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.agadar.brewingapi.help.References;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemPotion;
@@ -31,13 +29,13 @@ public class BrewingRecipes
     {
     	if (par1Input == null || par1Input.stackSize <= 0 || par2Ingredient == null || par2Ingredient.stackSize <= 0 || par3Output == null || par3Output.stackSize <= 0) 
     	{
-    		System.err.println(References.NAME + ": Error while adding a brewing recipe - the ItemStacks may not be null or have a stack size smaller than 1.");
+    		System.err.println(BrewingAPI.NAME + ": Error while adding a brewing recipe - the ItemStacks may not be null or have a stack size smaller than 1.");
     		return;
     	}
     	
     	if (!(par1Input.getItem() instanceof ItemPotion) || !(par3Output.getItem() instanceof ItemPotion))
     	{
-    		System.err.println(References.NAME + ": Error while adding a brewing recipe - the Items of the input and the output ItemStacks have to be instances of ItemPotion.");
+    		System.err.println(BrewingAPI.NAME + ": Error while adding a brewing recipe - the Items of the input and the output ItemStacks have to be instances of ItemPotion.");
     		return;
     	}
     	

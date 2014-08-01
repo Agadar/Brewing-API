@@ -1,10 +1,7 @@
-package com.agadar.brewingapi.block;
+package com.agadar.brewingapi;
 
 import java.util.Random;
 
-import com.agadar.brewingapi.BrewingAPI;
-import com.agadar.brewingapi.item.ModItems;
-import com.agadar.brewingapi.tileentity.TileEntityBrewingStand2;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.entity.EntityLivingBase;
@@ -102,13 +99,13 @@ public class BlockBrewingStand2 extends BlockBrewingStand
     @Override
     public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-        return ModItems.brewing_stand2;
+        return BrewingAPI.brewing_stand_item2;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_)
     {
-        return ModItems.brewing_stand2;
+        return BrewingAPI.brewing_stand_item2;
     }
 }
