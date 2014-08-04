@@ -26,7 +26,7 @@ public class BrewingAPI implements IGuiHandler
 	/* These are the references we use. These values are the same for our entire mod, so we only have to make
 	them once here, and we can always access them. */
 	public static final String MODID = "brewingapi";
-	public static final String VERSION = "1.1.0";
+	public static final String VERSION = "1.1.1";
 	public static final String NAME = "Brewing-API";
 	
 	@Instance(value = BrewingAPI.MODID)

@@ -3,7 +3,6 @@ package com.agadar.brewingapi;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +38,7 @@ public class BrewingRecipes
     		return;
     	}
     	
-    	recipes.add(new BrewingRecipe(par1Input, par2Ingredient, par3Output));
+    	recipes.add(new BrewingRecipe(par1Input.copy(), par2Ingredient.copy(), par3Output.copy()));
     }
     
     /** Returns whether the given ItemStack is a valid ingredient for any brewing recipe. */
@@ -47,7 +46,10 @@ public class BrewingRecipes
     {
     	for (BrewingRecipe recipe : recipes)
     	{
-    		if (recipe.ingredient.getItem() == par1Ingredient.getItem() && recipe.ingredient.getItemDamage() == par1Ingredient.getItemDamage()) return true;
+    		if (this.areItemStacksEqual(par1Ingredient, recipe.ingredient))
+    		{
+    			return true;
+    		}
     	} 	
     	
     	return false;
@@ -55,16 +57,14 @@ public class BrewingRecipes
     
     /** Returns the result of applying the given ingredient to the given input.
      *  Returns null if the brewing recipe does not exist. */
-    @SuppressWarnings("unchecked")
-	public ItemStack getBrewingResult(ItemStack par1Input, ItemStack par2Ingredient)
+    public ItemStack getBrewingResult(ItemStack par1Input, ItemStack par2Ingredient)
     {
     	for (BrewingRecipe recipe : recipes)
     	{
-    		if (recipe.input.getItem() != par1Input.getItem() || recipe.input.getItemDamage() != par1Input.getItemDamage()) continue;
-    		if (recipe.ingredient.getItem() != par2Ingredient.getItem() || recipe.ingredient.getItemDamage() != par2Ingredient.getItemDamage()) continue;   		
-    		List<PotionEffect> inputList1 = Items.potionitem.getEffects(recipe.input);
-    		List<PotionEffect> inputList2 = Items.potionitem.getEffects(par1Input);
-    		if (inputList1 != null && inputList1.equals(inputList2)) return recipe.output.copy();
+    		if (this.areItemStacksEqual(par1Input, recipe.input) && this.areItemStacksEqual(par2Ingredient, recipe.ingredient))
+    		{
+    			return recipe.output.copy();
+    		}
     	}	
     	
     	return null;
@@ -83,5 +83,29 @@ public class BrewingRecipes
     		effect.writeCustomPotionEffectToNBT(effectTag);
     		effectsTagList.appendTag(effectTag);
     	}
+    }
+    
+    /** Checks whether two ItemStacks are equal to one another, ignoring stack sizes. */
+    private boolean areItemStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
+    {
+    	if (par1ItemStack == par2ItemStack)
+    	{
+    		return true;
+    	}
+    	
+    	if (par1ItemStack != null && par2ItemStack != null && par1ItemStack.getItem() == par2ItemStack.getItem() && par1ItemStack.getItemDamage() == par2ItemStack.getItemDamage())
+		{
+			if (par1ItemStack.stackTagCompound == par2ItemStack.stackTagCompound) 
+			{
+				return true;
+			}
+			
+			if (par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.equals(par2ItemStack.stackTagCompound))
+			{
+				return true;
+			}
+		}
+    	
+    	return false;
     }
 }
