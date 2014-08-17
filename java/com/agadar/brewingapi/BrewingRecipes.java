@@ -77,6 +77,16 @@ public class BrewingRecipes
     	}
     }
     
+    /** Calculates the duration modifier for a potion effect according to the given parameters. */
+	public float getDurationModifier(boolean splash, int amplification, boolean extended)
+	{
+		float modifier = splash ? 0.75F : 1.0F;		
+		for (int i = 0; i < amplification; i++)
+			modifier /= 2;
+		return extended ? modifier * 8 / 3 : modifier;
+	}
+
+	
     /** Checks whether two ItemStacks are equal to one another, ignoring stack sizes. */
     private boolean areItemStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
     {
