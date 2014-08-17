@@ -46,9 +46,7 @@ public class GuiBrewingStand2 extends GuiContainer
             int j1 = (int)(28.0F * (1.0F - (float)i1 / 400.0F));
 
             if (j1 > 0)
-            {
-                this.drawTexturedModalRect(k + 97, l + 16, 176, 0, 9, j1);
-            }
+            	this.drawTexturedModalRect(k + 97, l + 16, 176, 0, 9, j1);
 
             int k1 = i1 / 2 % 7;
 
@@ -77,9 +75,7 @@ public class GuiBrewingStand2 extends GuiContainer
             }
 
             if (j1 > 0)
-            {
-                this.drawTexturedModalRect(k + 65, l + 14 + 29 - j1, 185, 29 - j1, 12, j1);
-            }
+            	this.drawTexturedModalRect(k + 65, l + 14 + 29 - j1, 185, 29 - j1, 12, j1);
         }
     }
 }

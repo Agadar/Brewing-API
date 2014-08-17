@@ -31,17 +31,11 @@ public class ContainerBrewingStand2 extends Container
         int i;
 
         for (i = 0; i < 3; ++i)
-        {
             for (int j = 0; j < 9; ++j)
-            {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
+            	this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 
         for (i = 0; i < 9; ++i)
-        {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
-        }
+        	this.addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
     }
 
     @Override
@@ -57,14 +51,8 @@ public class ContainerBrewingStand2 extends Container
         super.detectAndSendChanges();
 
         for (int i = 0; i < this.crafters.size(); ++i)
-        {
-            ICrafting icrafting = (ICrafting)this.crafters.get(i);
-
             if (this.brewTime != this.tileBrewingStand.getBrewTime())
-            {
-                icrafting.sendProgressBarUpdate(this, 0, this.tileBrewingStand.getBrewTime());
-            }
-        }
+            	((ICrafting)this.crafters.get(i)).sendProgressBarUpdate(this, 0, this.tileBrewingStand.getBrewTime());
 
         this.brewTime = this.tileBrewingStand.getBrewTime();
     }
@@ -74,9 +62,7 @@ public class ContainerBrewingStand2 extends Container
     public void updateProgressBar(int par1, int par2)
     {
         if (par1 == 0)
-        {
-            this.tileBrewingStand.func_145938_d(par2);
-        }
+        	this.tileBrewingStand.func_145938_d(par2);
     }
 
     @Override
@@ -98,66 +84,39 @@ public class ContainerBrewingStand2 extends Container
 
             if ((par2 < 0 || par2 > 2) && par2 != 3)
             {
-                if (!this.theSlot.getHasStack() && this.theSlot.isItemValid(itemstack1))
-                {
-                    if (!this.mergeItemStack(itemstack1, 3, 4, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (ContainerBrewingStand2.Potion.canHoldPotion(itemstack))
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 3, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par2 >= 4 && par2 < 31)
-                {
-                    if (!this.mergeItemStack(itemstack1, 31, 40, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par2 >= 31 && par2 < 40)
-                {
-                    if (!this.mergeItemStack(itemstack1, 4, 31, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (!this.mergeItemStack(itemstack1, 4, 40, false))
-                {
-                    return null;
-                }
+                if (!this.theSlot.getHasStack() && this.theSlot.isItemValid(itemstack1) && !this.mergeItemStack(itemstack1, 3, 4, false))
+                	return null;
+                
+                if (ContainerBrewingStand2.Potion.canHoldPotion(itemstack) && !this.mergeItemStack(itemstack1, 0, 3, false))
+                	return null;
+                
+                if (par2 >= 4 && par2 < 31 && !this.mergeItemStack(itemstack1, 31, 40, false))
+                	return null;
+                
+                if (par2 >= 31 && par2 < 40 && !this.mergeItemStack(itemstack1, 4, 31, false))
+                	return null;
+
+                if (!this.mergeItemStack(itemstack1, 4, 40, false))
+                	return null;
             }
             else
             {
                 if (!this.mergeItemStack(itemstack1, 4, 40, true))
-                {
-                    return null;
-                }
+                	return null;
 
                 slot.onSlotChange(itemstack1, itemstack);
             }
 
             if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
+            	slot.putStack((ItemStack)null);
             else
-            {
-                slot.onSlotChanged();
-            }
+            	slot.onSlotChanged();
 
             if (itemstack1.stackSize == itemstack.stackSize)
-            {
-                return null;
-            }
+            	return null;
 
             slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
         }
-
         return itemstack;
     }
 
@@ -177,48 +136,46 @@ public class ContainerBrewingStand2 extends Container
         @Override
         public int getSlotStackLimit()
         {
-            return 64;
+        	return 64;
         }
     }
 
     static class Potion extends Slot
-        {
-            /** The player that has this container open. */
-            private EntityPlayer player;
-            
-            public Potion(EntityPlayer par1EntityPlayer, IInventory par2IInventory, int par3, int par4, int par5)
-            {
-                super(par2IInventory, par3, par4, par5);
-                this.player = par1EntityPlayer;
-            }
+    {
+    	/** The player that has this container open. */
+    	private EntityPlayer player;
 
-            @Override
-            public boolean isItemValid(ItemStack par1ItemStack)
-            {
-                return canHoldPotion(par1ItemStack);
-            }
+    	public Potion(EntityPlayer par1EntityPlayer, IInventory par2IInventory, int par3, int par4, int par5)
+    	{
+    		super(par2IInventory, par3, par4, par5);
+    		this.player = par1EntityPlayer;
+    	}
 
-            @Override
-            public int getSlotStackLimit()
-            {
-                return 1;
-            }
+    	@Override
+    	public boolean isItemValid(ItemStack par1ItemStack)
+    	{
+    		return canHoldPotion(par1ItemStack);
+    	}
 
-            @Override
-            public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
-            {
-                if (par2ItemStack.getItem() instanceof ItemPotion)
-                {
-                    this.player.addStat(AchievementList.potion, 1);
-                }
+    	@Override
+    	public int getSlotStackLimit()
+    	{
+    		return 1;
+    	}
 
-                super.onPickupFromSlot(par1EntityPlayer, par2ItemStack);
-            }
+    	@Override
+    	public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+    	{
+    		if (par2ItemStack.getItem() instanceof ItemPotion)
+    			this.player.addStat(AchievementList.potion, 1);
 
-            /** Returns true if this itemstack can be filled with a potion. */
-            public static boolean canHoldPotion(ItemStack par0ItemStack)
-            {
-                return par0ItemStack != null && (par0ItemStack.getItem() instanceof ItemPotion || par0ItemStack.getItem() == Items.glass_bottle);
-            }
-        }
+    		super.onPickupFromSlot(par1EntityPlayer, par2ItemStack);
+    	}
+
+    	/** Returns true if this itemstack can be filled with a potion. */
+    	public static boolean canHoldPotion(ItemStack par0ItemStack)
+    	{
+    		return par0ItemStack != null && (par0ItemStack.getItem() instanceof ItemPotion || par0ItemStack.getItem() == Items.glass_bottle);
+    	}
+    }
 }

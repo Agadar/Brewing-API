@@ -45,12 +45,8 @@ public class BrewingRecipes
     public boolean isPotionIngredient(ItemStack par1Ingredient)
     {
     	for (BrewingRecipe recipe : recipes)
-    	{
     		if (this.areItemStacksEqual(par1Ingredient, recipe.ingredient))
-    		{
     			return true;
-    		}
-    	} 	
     	
     	return false;
     }
@@ -60,12 +56,8 @@ public class BrewingRecipes
     public ItemStack getBrewingResult(ItemStack par1Input, ItemStack par2Ingredient)
     {
     	for (BrewingRecipe recipe : recipes)
-    	{
     		if (this.areItemStacksEqual(par1Input, recipe.input) && this.areItemStacksEqual(par2Ingredient, recipe.ingredient))
-    		{
     			return recipe.output.copy();
-    		}
-    	}	
     	
     	return null;
     }
@@ -89,21 +81,15 @@ public class BrewingRecipes
     private boolean areItemStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
     {
     	if (par1ItemStack == par2ItemStack)
-    	{
     		return true;
-    	}
     	
     	if (par1ItemStack != null && par2ItemStack != null && par1ItemStack.getItem() == par2ItemStack.getItem() && par1ItemStack.getItemDamage() == par2ItemStack.getItemDamage())
 		{
 			if (par1ItemStack.stackTagCompound == par2ItemStack.stackTagCompound) 
-			{
 				return true;
-			}
 			
 			if (par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.equals(par2ItemStack.stackTagCompound))
-			{
 				return true;
-			}
 		}
     	
     	return false;
