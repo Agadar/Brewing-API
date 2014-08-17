@@ -89,7 +89,6 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
             this.filledSlots = i;
             this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, i, 2);
         }
-
         super.updateEntity();
     }
 
@@ -100,22 +99,32 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
 
     private boolean canBrew()
     {
-    	if (this.brewingItemStacks[3] == null || this.brewingItemStacks[3].stackSize <= 0) return false;
+    	if (this.brewingItemStacks[3] == null || this.brewingItemStacks[3].stackSize <= 0) 
+    		return false;
 
     	for (int i = 0; i < 3; ++i)
     	{  			
-    		if (this.brewingItemStacks[i] == null || !(this.brewingItemStacks[i].getItem() instanceof ItemPotion)) continue;
+    		if (this.brewingItemStacks[i] == null || !(this.brewingItemStacks[i].getItem() instanceof ItemPotion)) 
+    			continue;
+    		
     		ItemStack output = BrewingRecipes.brewing().getBrewingResult(this.brewingItemStacks[i], this.brewingItemStacks[3]);
-    		if (output != null) return true;
+    		
+    		if (output != null) 
+    			return true;
     		
     		if (this.brewingItemStacks[3].getItem().isPotionIngredient(this.brewingItemStacks[3]))
     		{
     			int j = this.brewingItemStacks[i].getItemDamage();
     			int k = this.func_145936_c(j, this.brewingItemStacks[3]);
-    			if (!ItemPotion.isSplash(j) && ItemPotion.isSplash(k)) return true;
+    			
+    			if (!ItemPotion.isSplash(j) && ItemPotion.isSplash(k)) 
+    				return true;
+    			
     			List<?> list = Items.potionitem.getEffects(j);
     			List<?> list1 = Items.potionitem.getEffects(k);
-    			if ((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) return true;
+    			
+    			if ((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) 
+    				return true;
     		}
     	}
 
@@ -128,30 +137,36 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
         {
             for (int i = 0; i < 3; ++i)
             {
-            	if (this.brewingItemStacks[i] == null || !(this.brewingItemStacks[i].getItem() instanceof ItemPotion)) continue;
-            	int j = this.brewingItemStacks[i].getItemDamage();
-            	int k = this.func_145936_c(j, this.brewingItemStacks[3]);
-            	List<?> list = Items.potionitem.getEffects(j);
-            	List<?> list1 = Items.potionitem.getEffects(k);
+            	if (this.brewingItemStacks[i] == null || !(this.brewingItemStacks[i].getItem() instanceof ItemPotion)) 
+            		continue;
 
-            	if (((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) ||
-            			(!ItemPotion.isSplash(j) && ItemPotion.isSplash(k)))
-            	{
-            		this.brewingItemStacks[i].setItemDamage(k);
-            	}
-            	
             	ItemStack output = BrewingRecipes.brewing().getBrewingResult(this.brewingItemStacks[i], this.brewingItemStacks[3]);
-            	if (output != null) this.brewingItemStacks[i] = output;
+
+            	if (output != null)
+            		this.brewingItemStacks[i] = output;
+            	else
+            	{
+            		int j = this.brewingItemStacks[i].getItemDamage();
+            		int k = this.func_145936_c(j, this.brewingItemStacks[3]);
+            		List<?> list = Items.potionitem.getEffects(j);
+            		List<?> list1 = Items.potionitem.getEffects(k);
+
+            		if (((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k) ||
+            				(!ItemPotion.isSplash(j) && ItemPotion.isSplash(k)))
+            		{
+            			this.brewingItemStacks[i].setItemDamage(k);
+            		}
+            	}
             }
 
             if (this.brewingItemStacks[3].getItem().hasContainerItem(this.brewingItemStacks[3]))
-            {
             	this.brewingItemStacks[3] = this.brewingItemStacks[3].getItem().getContainerItem(this.brewingItemStacks[3]);
-            }
             else
             {
                 --this.brewingItemStacks[3].stackSize;
-                if (this.brewingItemStacks[3].stackSize <= 0) this.brewingItemStacks[3] = null;
+                
+                if (this.brewingItemStacks[3].stackSize <= 0) 
+                	this.brewingItemStacks[3] = null;
             }
             
             MinecraftForge.EVENT_BUS.post(new PotionBrewedEvent(brewingItemStacks));
@@ -177,17 +192,13 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
             byte b0 = nbttagcompound1.getByte("Slot");
 
             if (b0 >= 0 && b0 < this.brewingItemStacks.length)
-            {
-                this.brewingItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-            }
+            	this.brewingItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
         }
 
         this.brewTime = p_145839_1_.getShort("BrewTime");
 
         if (p_145839_1_.hasKey("CustomName", 8))
-        {
-            this.customName = p_145839_1_.getString("CustomName");
-        }
+        	this.customName = p_145839_1_.getString("CustomName");
     }
 
     @Override
@@ -211,9 +222,7 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
         p_145841_1_.setTag("Items", nbttaglist);
 
         if (this.hasCustomInventoryName())
-        {
-            p_145841_1_.setString("CustomName", this.customName);
-        }
+        	p_145841_1_.setString("CustomName", this.customName);
     }
 
     @Override
@@ -242,15 +251,15 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
             ItemStack itemstack = this.brewingItemStacks[par1];
             this.brewingItemStacks[par1] = null;
             return itemstack;
-        }
-        
+        }        
         return null;
     }
 
     @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
     {
-        if (par1 >= 0 && par1 < this.brewingItemStacks.length) this.brewingItemStacks[par1] = par2ItemStack;
+        if (par1 >= 0 && par1 < this.brewingItemStacks.length) 
+        	this.brewingItemStacks[par1] = par2ItemStack;
     }
 
     @Override
@@ -290,10 +299,9 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
         int i = 0;
 
         for (int j = 0; j < 3; ++j)
-        {
-            if (this.brewingItemStacks[j] != null) i |= 1 << j;
-        }
-
+        	if (this.brewingItemStacks[j] != null) 
+        		i |= 1 << j;
+        
         return i;
     }
 
