@@ -112,7 +112,8 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
     		if (output != null) 
     			return true;
     		
-    		if (this.brewingItemStacks[3].getItem().isPotionIngredient(this.brewingItemStacks[3]))
+    		if (this.brewingItemStacks[3].getItem().isPotionIngredient(this.brewingItemStacks[3]) &&
+    				this.brewingItemStacks[i].getItem().getClass() == ItemPotion.class)
     		{
     			int j = this.brewingItemStacks[i].getItemDamage();
     			int k = this.func_145936_c(j, this.brewingItemStacks[3]);
@@ -144,7 +145,8 @@ public class TileEntityBrewingStand2 extends TileEntity implements ISidedInvento
 
             	if (output != null)
             		this.brewingItemStacks[i] = output;
-            	else
+            	else if (this.brewingItemStacks[3].getItem().isPotionIngredient(this.brewingItemStacks[3]) && 
+            			this.brewingItemStacks[i].getItem().getClass() == ItemPotion.class)
             	{
             		int j = this.brewingItemStacks[i].getItemDamage();
             		int k = this.func_145936_c(j, this.brewingItemStacks[3]);
